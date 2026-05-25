@@ -76,7 +76,7 @@ export function Hero() {
             transition={{ duration: 1.5, delay: 1 }}
             className="mt-20 hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.2em] text-muted-foreground"
           >
-            <span>Lagos · Nigeria</span>
+            <span>Africa · Worldwide</span>
             <span className="h-px flex-1 max-w-24 bg-border" />
             <span>Currently observing</span>
           </motion.div>
