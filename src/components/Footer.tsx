@@ -46,7 +46,7 @@ export function Footer() {
               Currently
             </div>
             <p className="text-sm text-foreground/70 leading-relaxed">
-              Observing how people interact with everyday systems. Based in Lagos.
+              Observing how people interact with everyday systems. Based in Africa.
             </p>
           </div>
         </div>

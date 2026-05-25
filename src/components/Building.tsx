@@ -97,9 +97,9 @@ function TithetifyMock() {
 
 function WerktifyMock() {
   const jobs = [
-    { role: "Bartender", venue: "Eko Hotel", dist: "1.2 km", urgent: true },
-    { role: "Server", venue: "Lagos Continental", dist: "2.4 km", urgent: false },
-    { role: "Kitchen prep", venue: "Nok by Alara", dist: "3.0 km", urgent: true },
+    { role: "Bartender", venue: "The Grand Hotel", dist: "1.2 km", urgent: true },
+    { role: "Server", venue: "Continental Suites", dist: "2.4 km", urgent: false },
+    { role: "Kitchen prep", venue: "Nok Lounge", dist: "3.0 km", urgent: true },
   ];
   return (
     <div className="rounded-md border border-border bg-ink/60 backdrop-blur p-5 text-xs font-mono">

@@ -145,7 +145,7 @@ export function Community() {
               <PinIcon delay={0.7} />
             </div>
             <div className="absolute bottom-4 left-0 right-0 text-center text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-              Lagos · Recurring
+              Port Harcourt · Recurring
             </div>
           </motion.div>
         </div>
