@@ -73,7 +73,7 @@ function TithetifyMock() {
         </div>
         <span className="text-forest-soft text-[10px] uppercase tracking-widest">Consistent</span>
       </div>
-      <div className="grid grid-cols-14 gap-1.5">
+      <div className="grid grid-cols-7 gap-1.5">
         {days.map((_, i) => (
           <motion.div
             key={i}
