@@ -57,7 +57,7 @@ export function Thoughts() {
                   : "text-left"
               }`}
             >
-              <p className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05] text-balance max-w-4xl">
+              <p className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] text-balance max-w-4xl">
                 <span className="text-forest-soft">"</span>
                 {t}
                 <span className="text-forest-soft">"</span>
