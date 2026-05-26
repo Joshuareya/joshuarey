@@ -35,7 +35,7 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.15 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-balance font-light"
           >
-            I study how people <em className="not-italic text-forest-soft">behave</em>,
+            I study <em className="not-italic text-forest-soft">human behavior</em>,
             then build systems around it.
           </motion.h1>
 
