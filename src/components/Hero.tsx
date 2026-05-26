@@ -15,7 +15,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10 pt-32 md:pt-40 pb-20 grid md:grid-cols-12 gap-10 items-center min-h-screen">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10 pt-28 md:pt-40 pb-20 grid md:grid-cols-12 gap-8 md:gap-10 items-center min-h-screen">
         <div className="md:col-span-7 order-2 md:order-1">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
