@@ -35,7 +35,7 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.15 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-balance font-light"
           >
-            I study how people <em className="not-italic text-forest-soft">behave</em>,
+            I study <em className="not-italic text-forest-soft">human behavior</em>,
             then build systems around it.
           </motion.h1>
 
@@ -90,17 +90,13 @@ export function Hero() {
         >
           <div className="relative aspect-[4/5] w-full">
             <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
-            <div className="absolute top-8 -left-4 md:-left-10 h-40 w-40 md:h-56 md:w-56 rounded-full bg-forest -z-0" />
+            <div className="absolute top-10 -left-2 md:-left-6 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest -z-0" />
             <img
               src={heroImg}
               alt="Joshua Rey portrait in traditional black agbada with a green cap"
               className="relative z-10 h-full w-full object-contain object-bottom"
               style={{ filter: "grayscale(0.15) contrast(1.05)" }}
             />
-            <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-between text-[10px] uppercase tracking-[0.2em] text-muted-foreground border-t border-border pt-3">
-              <span>Portrait · 2026</span>
-              <span>Joshua Rey</span>
-            </div>
           </div>
         </motion.div>
       </div>

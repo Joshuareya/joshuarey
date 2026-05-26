@@ -43,8 +43,8 @@ export function Nav() {
           className="flex items-center gap-2 group"
         >
           <span className="h-2 w-2 rounded-full bg-forest group-hover:scale-150 transition-transform" />
-          <span className="text-sm tracking-widest uppercase font-medium">
-            Joshua Rey
+          <span className="text-sm tracking-widest uppercase font-light">
+            Joshua <span className="font-bold">Rey</span>
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-8">
