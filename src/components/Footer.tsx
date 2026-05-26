@@ -1,8 +1,7 @@
 const socials = [
-  { l: "Instagram", h: "https://instagram.com" },
-  { l: "LinkedIn", h: "https://linkedin.com" },
-  { l: "X / Twitter", h: "https://x.com" },
-  { l: "Email", h: "mailto:hello@joshuarey.com" },
+  { l: "Instagram", h: "https://www.instagram.com/joshuarey.a/" },
+  { l: "X / Twitter", h: "https://x.com/joshuarey_" },
+  { l: "Email", h: "mailto:joshuarey.org@gmail.com" },
 ];
 
 export function Footer() {
