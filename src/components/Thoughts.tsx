@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
-import thoughtsImg from "@/assets/rey-green-tie.png";
+import thoughtsImg from "@/assets/rey-thoughts.png";
 
 const thoughts = [
   "Good systems make the right behavior easier.",
@@ -14,20 +14,19 @@ export function Thoughts() {
       id="thoughts"
       className="relative py-32 md:py-48 px-6 md:px-10 border-t border-border overflow-hidden"
     >
-      {/* Background portrait */}
+      {/* Background portrait — visible but quiet */}
       <div className="pointer-events-none absolute inset-0 -z-0">
         <img
           src={thoughtsImg}
-          alt=""
-          aria-hidden
-          className="absolute right-0 top-1/2 -translate-y-1/2 h-[90%] w-auto object-contain opacity-[0.09] md:opacity-[0.13]"
-          style={{ filter: "grayscale(1) contrast(1.1)" }}
+          alt="Joshua Rey portrait"
+          className="absolute right-0 bottom-0 h-[85%] md:h-[95%] w-auto object-contain object-bottom opacity-40 md:opacity-55"
+          style={{ filter: "contrast(1.05) brightness(0.95)" }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 50%, var(--background) 30%, transparent 80%)",
+              "linear-gradient(to right, var(--background) 0%, var(--background) 35%, transparent 70%, color-mix(in oklab, var(--background) 60%, transparent) 100%)",
           }}
         />
       </div>
