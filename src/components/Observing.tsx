@@ -74,7 +74,12 @@ export function Observing() {
                   aria-expanded={isOpen}
                   className="group w-full grid grid-cols-12 gap-4 py-8 md:py-10 items-baseline text-left cursor-pointer"
                 >
-                  <span className="col-span-2 md:col-span-1 text-xs font-mono text-muted-foreground group-hover:text-forest-soft transition-colors">
+                  <span className="col-span-2 md:col-span-1 flex items-center gap-2 text-xs font-mono text-muted-foreground group-hover:text-forest-soft transition-colors">
+                    <motion.span
+                      className="h-1.5 w-1.5 rounded-full bg-forest-soft inline-block"
+                      animate={{ opacity: [0.35, 1, 0.35] }}
+                      transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.25, ease: "easeInOut" }}
+                    />
                     {n.i}
                   </span>
                   <p className="col-span-10 md:col-span-9 text-xl md:text-3xl font-light leading-snug tracking-tight text-balance text-foreground/85 group-hover:text-foreground transition-colors">
