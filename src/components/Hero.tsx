@@ -90,7 +90,7 @@ export function Hero() {
         >
           <div className="relative aspect-[4/5] w-full">
             <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
-            <div className="absolute top-10 -left-2 md:-left-6 h-30 w-30 md:h-44 md:w-44 rounded-full bg-forest -z-0" style={{ height: "7.5rem", width: "7.5rem" }} />
+            <div className="absolute top-10 -left-2 md:-left-6 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest -z-0" />
             <img
               src={heroImg}
               alt="Joshua Rey portrait in traditional black agbada with a green cap"
