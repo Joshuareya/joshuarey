@@ -15,7 +15,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10 pt-32 md:pt-40 pb-20 grid md:grid-cols-12 gap-10 items-center min-h-screen">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10 pt-28 md:pt-40 pb-20 grid md:grid-cols-12 gap-8 md:gap-10 items-center min-h-screen">
         <div className="md:col-span-7 order-2 md:order-1">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -33,7 +33,8 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-balance font-light"
+            className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-balance font-light"
+
           >
             I study <em className="not-italic text-forest-soft">human behavior</em>,
             then build systems around it.
@@ -88,7 +89,7 @@ export function Hero() {
           transition={{ duration: 1.4, ease: "easeOut" }}
           className="md:col-span-5 order-1 md:order-2 relative"
         >
-          <div className="relative aspect-[4/5] w-full">
+          <div className="relative aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto">
             <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
             <div className="absolute top-10 -left-2 md:-left-6 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest -z-0" />
             <img
