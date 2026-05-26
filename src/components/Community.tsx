@@ -119,8 +119,8 @@ export function Community() {
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              <Stat n="240+" l="Trees planted" />
-              <Stat n="14" l="Gatherings" />
+              <Stat n="95+" l="Trees planted" />
+              <Stat n="5" l="Gatherings" />
               <Stat n="3" l="Cities" />
             </div>
           </div>
