@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
-import thoughtsImg from "@/assets/rey-thoughts.png";
+import thoughtsVideo from "@/assets/rey-thoughts.mp4";
 
 const thoughts = [
   "Good systems make the right behavior easier.",
@@ -16,9 +16,14 @@ export function Thoughts() {
     >
       {/* Background portrait — clearly visible */}
       <div className="pointer-events-none absolute inset-0 -z-0">
-        <img
-          src={thoughtsImg}
-          alt="Joshua Rey portrait"
+        <video
+          src={thoughtsVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          aria-label="Joshua Rey portrait"
           className="absolute right-0 bottom-0 h-[70%] sm:h-[85%] md:h-full w-auto object-contain object-bottom opacity-80 md:opacity-90"
           style={{ filter: "contrast(1.08) brightness(1)" }}
         />
