@@ -112,3 +112,63 @@ export function Hero() {
     </section>
   );
 }
+
+function InteractivePortrait() {
+  const ref = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const sx = useSpring(mx, { stiffness: 80, damping: 18 });
+  const sy = useSpring(my, { stiffness: 80, damping: 18 });
+
+  // circle drifts horizontally + scales as cursor moves; on hover it slides behind
+  const circleX = useTransform(sx, [0, 1], ["-12%", "28%"]);
+  const circleY = useTransform(sy, [0, 1], ["-8%", "12%"]);
+  const circleScale = useTransform(sx, [0, 0.5, 1], [0.9, 1.05, 1.15]);
+
+  // scroll progression — as user scrolls past hero, circle settles behind portrait
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const circleZ = useTransform(scrollYProgress, [0, 0.15], [0, -1]);
+  const circleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.35]);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width);
+    my.set((e.clientY - r.top) / r.height);
+  };
+  const handleLeave = () => {
+    mx.set(0.5);
+    my.set(0.5);
+  };
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className="group relative aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
+    >
+      <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
+      <motion.div
+        style={{
+          x: circleX,
+          y: circleY,
+          scale: circleScale,
+          zIndex: circleZ,
+          opacity: circleOpacity,
+        }}
+        className="absolute top-10 left-0 md:-left-4 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest transition-[filter] duration-500 group-hover:blur-[2px]"
+      />
+      <img
+        src={heroImg}
+        alt="Joshua Rey portrait in traditional black agbada"
+        className="relative z-10 h-full w-full object-contain object-bottom select-none pointer-events-none"
+        style={{ filter: "grayscale(0.1) contrast(1.05)" }}
+        draggable={false}
+      />
+    </div>
+  );
+}
+
