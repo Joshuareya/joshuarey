@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { SectionLabel } from "./SectionLabel";
 import thoughtsVideo from "@/assets/rey-thoughts.mp4";
 
@@ -9,6 +10,19 @@ const thoughts = [
 ];
 
 export function Thoughts() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    const onVisible = () => document.visibilityState === "visible" && tryPlay();
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  }, []);
+
   return (
     <section
       id="thoughts"
@@ -17,11 +31,15 @@ export function Thoughts() {
       {/* Background portrait — clearly visible */}
       <div className="pointer-events-none absolute inset-0 -z-0">
         <video
+          ref={videoRef}
           src={thoughtsVideo}
           autoPlay
           loop
           muted
           playsInline
+          {...({ "webkit-playsinline": "true" } as any)}
+          disablePictureInPicture
+          controls={false}
           preload="auto"
           aria-label="Joshua Rey portrait"
           className="absolute right-0 bottom-0 h-[70%] sm:h-[85%] md:h-full w-auto object-contain object-bottom opacity-80 md:opacity-90"
