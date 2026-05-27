@@ -91,16 +91,9 @@ export function Hero() {
           transition={{ duration: 1.4, ease: "easeOut" }}
           className="md:col-span-5 order-1 md:order-2 relative"
         >
-          <div className="relative aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto">
-            <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
-            <div className="absolute top-10 -left-2 md:-left-6 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest -z-0" />
-            <img
-              src={heroImg}
-              alt="Joshua Rey portrait in traditional black agbada with a green cap"
-              className="relative z-10 h-full w-full object-contain object-bottom"
-              style={{ filter: "grayscale(0.15) contrast(1.05)" }}
-            />
-          </div>
+          <InteractivePortrait />
+        </motion.div>
+
         </motion.div>
       </div>
 
