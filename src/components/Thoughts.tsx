@@ -37,8 +37,7 @@ export function Thoughts() {
           loop
           muted
           playsInline
-          // @ts-expect-error iOS Safari attribute
-          webkit-playsinline="true"
+          {...({ "webkit-playsinline": "true" } as any)}
           disablePictureInPicture
           controls={false}
           preload="auto"
