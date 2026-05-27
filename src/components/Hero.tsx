@@ -93,9 +93,8 @@ export function Hero() {
         >
           <InteractivePortrait />
         </motion.div>
-
-        </motion.div>
       </div>
+
 
       <motion.div
         initial={{ opacity: 0 }}
