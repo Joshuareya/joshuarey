@@ -150,7 +150,11 @@ function InteractivePortrait() {
       onMouseLeave={handleLeave}
       className="group relative aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
     >
-      <div className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full" />
+      <motion.div
+        animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full"
+      />
       <motion.div
         style={{
           x: circleX,
@@ -159,8 +163,18 @@ function InteractivePortrait() {
           zIndex: circleZ,
           opacity: circleOpacity,
         }}
-        className="absolute top-10 left-0 md:-left-4 h-32 w-32 md:h-44 md:w-44 rounded-full bg-forest transition-[filter] duration-500 group-hover:blur-[2px]"
-      />
+        className="absolute top-10 left-0 md:-left-4 h-32 w-32 md:h-44 md:w-44 transition-[filter] duration-500 group-hover:blur-[2px]"
+      >
+        <motion.div
+          animate={{
+            y: [0, -14, 0, 10, 0],
+            x: [0, 8, 0, -6, 0],
+            scale: [1, 1.05, 1, 0.97, 1],
+          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full bg-forest"
+        />
+      </motion.div>
       <img
         src={heroImg}
         alt="Joshua Rey portrait in traditional black agbada"
