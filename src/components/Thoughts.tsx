@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { SectionLabel } from "./SectionLabel";
-import thoughtsVideo from "@/assets/rey-thoughts.mp4";
+import thoughtsImage from "@/assets/rey-thoughts.png";
 
 const thoughts = [
   "Good systems make the right behavior easier.",
@@ -10,38 +10,32 @@ const thoughts = [
 ];
 
 export function Thoughts() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = true;
-    const tryPlay = () => v.play().catch(() => {});
-    tryPlay();
-    const onVisible = () => document.visibilityState === "visible" && tryPlay();
-    document.addEventListener("visibilitychange", onVisible);
-    return () => document.removeEventListener("visibilitychange", onVisible);
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % thoughts.length);
+    }, 4200);
+    return () => clearInterval(id);
   }, []);
+
+  const alignment =
+    index === 1
+      ? "justify-center text-center"
+      : index === 2
+      ? "justify-end text-right"
+      : "justify-start text-left";
 
   return (
     <section
       id="thoughts"
       className="relative py-32 md:py-48 px-6 md:px-10 border-t border-border overflow-hidden"
     >
-      {/* Background portrait — clearly visible */}
+      {/* Background portrait */}
       <div className="pointer-events-none absolute inset-0 -z-0">
-        <video
-          ref={videoRef}
-          src={thoughtsVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
-          {...({ "webkit-playsinline": "true" } as any)}
-          disablePictureInPicture
-          controls={false}
-          preload="auto"
-          aria-label="Joshua Rey portrait"
+        <img
+          src={thoughtsImage}
+          alt="Joshua Rey portrait"
           className="absolute right-0 bottom-0 h-[70%] sm:h-[85%] md:h-full w-auto object-contain object-bottom opacity-80 md:opacity-90"
           style={{ filter: "contrast(1.08) brightness(1)" }}
         />
@@ -64,29 +58,37 @@ export function Thoughts() {
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionLabel index="04" label="Thoughts" />
 
-        <div className="space-y-24 md:space-y-40 mt-16">
-          {thoughts.map((t, i) => (
+        <div className="relative mt-16 min-h-[300px] md:min-h-[480px] flex items-center">
+          <AnimatePresence mode="wait">
             <motion.blockquote
-              key={t}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className={`flex ${
-                i === 1
-                  ? "justify-center text-center"
-                  : i === 2
-                  ? "justify-end text-right"
-                  : "text-left"
-              }`}
+              key={index}
+              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className={`w-full flex ${alignment}`}
             >
               <p className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] text-balance max-w-4xl">
                 <span className="text-forest-soft">"</span>
-                {t}
+                {thoughts[index]}
                 <span className="text-forest-soft">"</span>
               </p>
             </motion.blockquote>
-          ))}
+          </AnimatePresence>
+
+          {/* Progress dots */}
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2">
+            {thoughts.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                aria-label={`Show thought ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === index ? "w-8 bg-forest-soft" : "w-1.5 bg-foreground/30"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
