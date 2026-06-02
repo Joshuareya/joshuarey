@@ -3,7 +3,6 @@ import { useRef } from "react";
 import heroImg from "@/assets/rey-green-cap.png";
 import { SystemLines } from "./SystemLines";
 
-
 export function Hero() {
   return (
     <section id="top" className="relative min-h-screen w-full overflow-hidden grain">
@@ -36,10 +35,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
             className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-balance font-light"
-
           >
-            I study <em className="not-italic text-forest-soft">human behavior</em>,
-            then build systems around it.
+            I study <em className="not-italic text-forest-soft">human behavior</em>, then build
+            systems around it.
           </motion.h1>
 
           <motion.p
@@ -48,8 +46,8 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.4 }}
             className="mt-8 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
           >
-            I build systems around how people move, work, give, respond, and interact
-            with everyday processes.
+            I build systems around how people move, work, give, respond, and interact with everyday
+            processes.
           </motion.p>
 
           <motion.div
@@ -95,7 +93,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -125,12 +122,11 @@ function InteractivePortrait() {
   const circleY = useTransform(sy, [0, 1], ["-8%", "12%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.9, 1.05, 1.15]);
 
-  // scroll progression — as user scrolls past hero, circle settles behind portrait
+  // scroll progression — as user scrolls past hero, glow fades but always stays behind portrait
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const circleZ = useTransform(scrollYProgress, [0, 0.15], [0, -1]);
   const circleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.35]);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -148,22 +144,21 @@ function InteractivePortrait() {
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="group relative aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
+      className="group relative isolate aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
     >
       <motion.div
         animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -inset-6 bg-forest/10 blur-3xl rounded-full"
+        className="pointer-events-none absolute -inset-6 z-0 rounded-full bg-forest/10 blur-3xl"
       />
       <motion.div
         style={{
           x: circleX,
           y: circleY,
           scale: circleScale,
-          zIndex: circleZ,
           opacity: circleOpacity,
         }}
-        className="absolute top-10 left-0 md:-left-4 h-32 w-32 md:h-44 md:w-44 transition-[filter] duration-500 group-hover:blur-[2px]"
+        className="pointer-events-none absolute top-10 left-0 z-0 h-32 w-32 transition-[filter] duration-500 group-hover:blur-[2px] md:-left-4 md:h-44 md:w-44"
       >
         {/* radiating illumination halo */}
         <motion.div
@@ -189,11 +184,13 @@ function InteractivePortrait() {
       <img
         src={heroImg}
         alt="Joshua Rey portrait in traditional black agbada"
-        className="relative z-10 h-full w-full object-contain object-bottom select-none pointer-events-none"
-        style={{ filter: "grayscale(0.1) contrast(1.05)" }}
+        className="pointer-events-none relative z-10 h-full w-full select-none object-contain object-bottom"
+        style={{
+          filter:
+            "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))",
+        }}
         draggable={false}
       />
     </div>
   );
 }
-
