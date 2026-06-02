@@ -1,5 +1,5 @@
-import { animate, motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 import heroImg from "@/assets/rey-green-cap.png";
 import { SystemLines } from "./SystemLines";
 
@@ -143,26 +143,7 @@ function InteractivePortrait() {
     my.set(0.5);
   };
 
-  // Touch devices have no cursor — drive a gentle, continuous sway so the
-  // 3D tilt and backlight still come alive on mobile.
-  useEffect(() => {
-    const isTouch = window.matchMedia("(hover: none)").matches;
-    if (!isTouch) return;
-    const c1 = animate(mx, [0.38, 0.62, 0.38], {
-      duration: 9,
-      repeat: Infinity,
-      ease: "easeInOut",
-    });
-    const c2 = animate(my, [0.42, 0.58, 0.42], {
-      duration: 11,
-      repeat: Infinity,
-      ease: "easeInOut",
-    });
-    return () => {
-      c1.stop();
-      c2.stop();
-    };
-  }, [mx, my]);
+
 
   return (
     <div
@@ -202,8 +183,8 @@ function InteractivePortrait() {
         <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
         {/* the disc itself */}
         <motion.div
-          animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.03, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.04, 1], x: [0, 6, 0], y: [0, -5, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 rounded-full"
           style={{
             background:
