@@ -182,16 +182,13 @@ function InteractivePortrait() {
           className="h-full w-full select-none object-contain object-bottom"
           style={{
             filter:
-              "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))",
+              "grayscale(0.1) contrast(1.05) drop-shadow(0 0 12px color-mix(in oklab, var(--forest) 14%, transparent))",
           }}
           draggable={false}
         />
       </motion.div>
-      <motion.div
-        animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-0 h-3/4 w-3/4 rounded-full bg-forest/10 blur-3xl"
-      />
+
+      {/* defined green circle backlight behind the portrait */}
       <motion.div
         style={{
           x: circleX,
@@ -199,29 +196,24 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-0 mb-[8%] h-52 w-52 transition-[filter] duration-500 group-hover:blur-sm md:h-72 md:w-72"
+        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -mt-[6%] h-56 w-56 md:h-72 md:w-72"
       >
-        {/* radiating illumination halo */}
+        {/* soft outer wash (reduced) */}
+        <div className="absolute -inset-6 rounded-full bg-forest/12 blur-3xl" />
+        {/* crisp visible ring */}
         <motion.div
-          animate={{ opacity: [0.45, 0.9, 0.45], scale: [1, 1.25, 1] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -inset-10 rounded-full bg-forest/35 blur-3xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, -10, 0, 8, 0],
-            x: [0, 6, 0, -5, 0],
-            scale: [1, 1.05, 1, 0.97, 1],
-            boxShadow: [
-              "0 0 90px 30px color-mix(in oklab, var(--forest) 45%, transparent)",
-              "0 0 150px 54px color-mix(in oklab, var(--forest) 62%, transparent)",
-              "0 0 90px 30px color-mix(in oklab, var(--forest) 45%, transparent)",
-            ],
+          animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.04, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full border border-forest-soft/40 bg-forest/15"
+          style={{
+            boxShadow:
+              "inset 0 0 60px color-mix(in oklab, var(--forest) 35%, transparent), 0 0 40px color-mix(in oklab, var(--forest) 22%, transparent)",
           }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-full bg-forest/45 blur-xl"
         />
       </motion.div>
+
+      {/* grounding shadow so the portrait rests instead of floating */}
+      <div className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-[5] mb-[1%] h-6 w-2/3 rounded-[100%] bg-black/55 blur-xl md:h-8" />
     </div>
   );
 }
