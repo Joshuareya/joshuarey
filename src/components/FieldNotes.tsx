@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "sonner";
 import { SectionLabel } from "./SectionLabel";
 
 const notes = [
   {
+    slug: "cost-of-being-slightly-hard-to-use",
     date: "May 2026",
     title: "The cost of being slightly hard to use",
     excerpt:
@@ -16,6 +18,7 @@ const notes = [
     ],
   },
   {
+    slug: "visibility-before-rules",
     date: "Apr 2026",
     title: "Visibility before rules",
     excerpt:
@@ -28,6 +31,7 @@ const notes = [
     ],
   },
   {
+    slug: "building-for-the-second-open",
     date: "Mar 2026",
     title: "On building for the second time someone opens the app",
     excerpt:
@@ -40,6 +44,7 @@ const notes = [
     ],
   },
   {
+    slug: "streaks-work-dashboards-dont",
     date: "Feb 2026",
     title: "Why streaks work and dashboards don't",
     excerpt:
@@ -55,6 +60,35 @@ const notes = [
 
 export function FieldNotes() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  // open a note directly when linked via #slug
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const idx = notes.findIndex((n) => n.slug === hash);
+    if (idx !== -1) {
+      setOpenIdx(idx);
+      // let layout settle, then bring it into view
+      requestAnimationFrame(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }
+  }, []);
+
+  const handleShare = async (slug: string, title: string) => {
+    const url = `${window.location.origin}${window.location.pathname}#${slug}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `Field note — ${title}`, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copied", { description: "Share this field note anywhere." });
+    } catch {
+      // user cancelled native share, or clipboard blocked — fail quietly
+    }
+  };
 
   return (
     <section
@@ -84,12 +118,13 @@ export function FieldNotes() {
             const isOpen = openIdx === i;
             return (
               <motion.article
-                key={n.title}
+                key={n.slug}
+                id={n.slug}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group bg-background p-8 md:p-12 hover:bg-card transition-colors"
+                className="group bg-background p-8 md:p-12 hover:bg-card transition-colors scroll-mt-24"
               >
                 <button
                   type="button"
@@ -131,8 +166,15 @@ export function FieldNotes() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                </button>
 
-                  <div className="mt-10 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-foreground/70 group-hover:text-forest-soft transition-colors">
+                <div className="mt-10 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setOpenIdx(isOpen ? null : i)}
+                    aria-expanded={isOpen}
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-foreground/70 hover:text-forest-soft transition-colors cursor-pointer"
+                  >
                     {isOpen ? "Close note" : "Read note"}
                     <span
                       className={`transition-transform ${
@@ -141,13 +183,45 @@ export function FieldNotes() {
                     >
                       →
                     </span>
-                  </div>
-                </button>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleShare(n.slug, n.title)}
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-forest-soft transition-colors cursor-pointer"
+                    aria-label={`Share or copy a link to "${n.title}"`}
+                  >
+                    <ShareIcon />
+                    Share
+                  </button>
+                </div>
               </motion.article>
             );
           })}
         </div>
       </div>
     </section>
+  );
+}
+
+function ShareIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.6" y1="13.5" x2="15.4" y2="17.5" />
+      <line x1="15.4" y1="6.5" x2="8.6" y2="10.5" />
+    </svg>
   );
 }
