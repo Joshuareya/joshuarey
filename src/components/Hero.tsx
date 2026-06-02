@@ -188,7 +188,7 @@ function InteractivePortrait() {
         />
       </motion.div>
 
-      {/* defined green circle backlight behind the portrait */}
+      {/* solid green disc behind the portrait */}
       <motion.div
         style={{
           x: circleX,
@@ -196,21 +196,22 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -mt-[6%] h-56 w-56 md:h-72 md:w-72"
+        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[18%] -mt-[4%] h-60 w-60 md:h-80 md:w-80"
       >
-        {/* soft outer wash (reduced) */}
-        <div className="absolute -inset-6 rounded-full bg-forest/12 blur-3xl" />
-        {/* crisp visible ring */}
+        {/* soft outer halo */}
+        <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
+        {/* the disc itself */}
         <motion.div
-          animate={{ opacity: [0.7, 1, 0.7], scale: [1, 1.04, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute inset-0 rounded-full border border-forest-soft/40 bg-forest/15"
+          animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.03, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute inset-0 rounded-full"
           style={{
-            boxShadow:
-              "inset 0 0 60px color-mix(in oklab, var(--forest) 35%, transparent), 0 0 40px color-mix(in oklab, var(--forest) 22%, transparent)",
+            background:
+              "radial-gradient(circle at 50% 45%, color-mix(in oklab, var(--forest-soft) 92%, transparent) 0%, var(--forest) 45%, color-mix(in oklab, var(--forest) 40%, transparent) 78%, transparent 100%)",
           }}
         />
       </motion.div>
+
 
       {/* grounding shadow so the portrait rests instead of floating */}
       <div className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-[5] mb-[1%] h-6 w-2/3 rounded-[100%] bg-black/55 blur-xl md:h-8" />
