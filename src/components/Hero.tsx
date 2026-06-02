@@ -130,7 +130,7 @@ function InteractivePortrait() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const circleZ = useTransform(scrollYProgress, [0, 0.15], [20, -1]);
+  const circleZ = useTransform(scrollYProgress, [0, 0.15], [0, -1]);
   const circleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.35]);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -165,11 +165,22 @@ function InteractivePortrait() {
         }}
         className="absolute top-10 left-0 md:-left-4 h-32 w-32 md:h-44 md:w-44 transition-[filter] duration-500 group-hover:blur-[2px]"
       >
+        {/* radiating illumination halo */}
+        <motion.div
+          animate={{ opacity: [0.45, 0.9, 0.45], scale: [1, 1.25, 1] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -inset-8 rounded-full bg-forest/40 blur-2xl"
+        />
         <motion.div
           animate={{
             y: [0, -14, 0, 10, 0],
             x: [0, 8, 0, -6, 0],
             scale: [1, 1.05, 1, 0.97, 1],
+            boxShadow: [
+              "0 0 30px 6px color-mix(in oklab, var(--forest) 45%, transparent)",
+              "0 0 70px 22px color-mix(in oklab, var(--forest) 70%, transparent)",
+              "0 0 30px 6px color-mix(in oklab, var(--forest) 45%, transparent)",
+            ],
           }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 rounded-full bg-forest"
