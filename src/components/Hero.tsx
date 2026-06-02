@@ -130,7 +130,7 @@ function InteractivePortrait() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const circleZ = useTransform(scrollYProgress, [0, 0.15], [0, -1]);
+  const circleZ = useTransform(scrollYProgress, [0, 0.15], [20, -1]);
   const circleOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.35]);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
