@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { animate, motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
 import heroImg from "@/assets/rey-green-cap.png";
 import { SystemLines } from "./SystemLines";
 
