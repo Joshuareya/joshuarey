@@ -151,6 +151,7 @@ const products: Product[] = [
       "A live system that shows who is out, why they left, when they're expected back, and what needs attention — in real time.",
     themes: ["Visibility", "Accountability", "Coordination", "Operational clarity"],
     visual: <MovlifyMock />,
+    visitUrl: "https://www.movlify.org",
   },
   {
     id: "tithetify",
@@ -164,6 +165,7 @@ const products: Product[] = [
       "A quiet companion that tracks giving, sends thoughtful reminders, builds streaks, and turns intention into rhythm.",
     themes: ["Generosity", "Accountability", "Intentional habits", "Consistency"],
     visual: <TithetifyMock />,
+    visitUrl: "https://www.tithetify.com",
   },
   {
     id: "werktify",
@@ -177,6 +179,7 @@ const products: Product[] = [
       "A location-aware platform that matches venues with nearby available workers and removes the friction in between.",
     themes: ["Speed", "Accessibility", "Local discovery", "Instant staffing"],
     visual: <WerktifyMock />,
+    visitUrl: "https://www.werktify.com",
   },
 ];
 
