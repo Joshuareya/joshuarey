@@ -174,7 +174,7 @@ function InteractivePortrait() {
     >
       <motion.div
         style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
-        className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden"
+        className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden pb-6 md:pb-10"
       >
         <img
           src={heroImg}
@@ -196,7 +196,7 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[18%] -mt-[4%] h-60 w-60 md:h-80 md:w-80"
+        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[18%] -mt-[4%] h-44 w-44 md:h-60 md:w-60"
       >
         {/* soft outer halo */}
         <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
