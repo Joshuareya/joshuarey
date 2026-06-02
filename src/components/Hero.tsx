@@ -117,9 +117,9 @@ function InteractivePortrait() {
   const sx = useSpring(mx, { stiffness: 80, damping: 18 });
   const sy = useSpring(my, { stiffness: 80, damping: 18 });
 
-  // circle drifts horizontally + scales as cursor moves; on hover it slides behind
-  const circleX = useTransform(sx, [0, 1], ["-12%", "28%"]);
-  const circleY = useTransform(sy, [0, 1], ["-8%", "12%"]);
+  // glow drifts behind the portrait but never crosses over the face
+  const circleX = useTransform(sx, [0, 1], ["-8%", "14%"]);
+  const circleY = useTransform(sy, [0, 1], ["8%", "22%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.9, 1.05, 1.15]);
 
   // scroll progression — as user scrolls past hero, glow fades but always stays behind portrait
@@ -144,12 +144,24 @@ function InteractivePortrait() {
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="group relative isolate aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
+      className="group relative grid isolate aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
     >
+      <div className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden">
+        <img
+          src={heroImg}
+          alt="Joshua Rey portrait in traditional black agbada"
+          className="h-full w-full select-none object-contain object-bottom"
+          style={{
+            filter:
+              "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))",
+          }}
+          draggable={false}
+        />
+      </div>
       <motion.div
         animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -inset-6 z-0 rounded-full bg-forest/10 blur-3xl"
+        className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-0 h-3/4 w-3/4 rounded-full bg-forest/10 blur-3xl"
       />
       <motion.div
         style={{
@@ -158,7 +170,7 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none absolute top-10 left-0 z-0 h-32 w-32 transition-[filter] duration-500 group-hover:blur-[2px] md:-left-4 md:h-44 md:w-44"
+        className="pointer-events-none col-start-1 row-start-1 self-end justify-self-start z-0 mb-[18%] h-32 w-32 transition-[filter] duration-500 group-hover:blur-[2px] md:h-44 md:w-44"
       >
         {/* radiating illumination halo */}
         <motion.div
@@ -181,16 +193,6 @@ function InteractivePortrait() {
           className="absolute inset-0 rounded-full bg-forest"
         />
       </motion.div>
-      <img
-        src={heroImg}
-        alt="Joshua Rey portrait in traditional black agbada"
-        className="pointer-events-none relative z-10 h-full w-full select-none object-contain object-bottom"
-        style={{
-          filter:
-            "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))",
-        }}
-        draggable={false}
-      />
     </div>
   );
 }
