@@ -3,7 +3,6 @@ import { useRef } from "react";
 import heroImg from "@/assets/rey-green-cap.png";
 import { SystemLines } from "./SystemLines";
 
-
 export function Hero() {
   return (
     <section id="top" className="relative min-h-screen w-full overflow-hidden grain">
@@ -36,10 +35,10 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
             className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-balance font-light"
-
           >
-            I study <em className="not-italic text-forest-soft">human behavior</em>,
-            then build systems around it.
+          >
+            I study <em className="not-italic text-forest-soft">human behavior</em>, then build
+            systems around it.
           </motion.h1>
 
           <motion.p
@@ -48,8 +47,8 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.4 }}
             className="mt-8 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed"
           >
-            I build systems around how people move, work, give, respond, and interact
-            with everyday processes.
+            I build systems around how people move, work, give, respond, and interact with everyday
+            processes.
           </motion.p>
 
           <motion.div
@@ -94,7 +93,6 @@ export function Hero() {
           <InteractivePortrait />
         </motion.div>
       </div>
-
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -188,10 +186,12 @@ function InteractivePortrait() {
         src={heroImg}
         alt="Joshua Rey portrait in traditional black agbada"
         className="pointer-events-none relative z-10 h-full w-full select-none object-contain object-bottom"
-        style={{ filter: "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))" }}
+        style={{
+          filter:
+            "grayscale(0.1) contrast(1.05) drop-shadow(0 0 28px color-mix(in oklab, var(--forest) 28%, transparent))",
+        }}
         draggable={false}
       />
     </div>
   );
 }
-
