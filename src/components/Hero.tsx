@@ -143,6 +143,27 @@ function InteractivePortrait() {
     my.set(0.5);
   };
 
+  // Touch devices have no cursor — drive a gentle, continuous sway so the
+  // 3D tilt and backlight still come alive on mobile.
+  useEffect(() => {
+    const isTouch = window.matchMedia("(hover: none)").matches;
+    if (!isTouch) return;
+    const c1 = animate(mx, [0.38, 0.62, 0.38], {
+      duration: 9,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
+    const c2 = animate(my, [0.42, 0.58, 0.42], {
+      duration: 11,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
+    return () => {
+      c1.stop();
+      c2.stop();
+    };
+  }, [mx, my]);
+
   return (
     <div
       ref={ref}
