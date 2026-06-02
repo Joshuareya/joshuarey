@@ -177,7 +177,7 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[18%] -mt-[4%] h-32 w-32 md:h-48 md:w-48"
+        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[55%] -mt-[10%] h-32 w-32 md:h-48 md:w-48"
       >
         {/* soft outer halo */}
         <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
