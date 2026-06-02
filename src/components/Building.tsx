@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
 
+import type { ReactNode } from "react";
+
 type Product = {
   id: string;
   name: string;
@@ -9,7 +11,8 @@ type Product = {
   behavior: string;
   system: string;
   themes: string[];
-  visual: React.ReactNode;
+  visual: ReactNode;
+  visitUrl: string;
 };
 
 /* ---------- Visual mocks ---------- */
