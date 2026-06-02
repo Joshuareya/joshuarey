@@ -183,8 +183,8 @@ function InteractivePortrait() {
         <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
         {/* the disc itself */}
         <motion.div
-          animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.03, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ opacity: [0.9, 1, 0.9], scale: [1, 1.04, 1], x: [0, 6, 0], y: [0, -5, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 rounded-full"
           style={{
             background:
