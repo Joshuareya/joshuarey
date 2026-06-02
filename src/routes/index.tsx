@@ -43,6 +43,7 @@ function Index() {
         <Thoughts />
         <FieldNotes />
         <Community />
+        <Connect />
       </main>
       <Footer />
     </div>
