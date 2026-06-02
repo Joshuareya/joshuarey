@@ -119,7 +119,7 @@ function InteractivePortrait() {
 
   // glow drifts behind the portrait as a backlight, not a foreground disk
   const circleX = useTransform(sx, [0, 1], ["-6%", "10%"]);
-  const circleY = useTransform(sy, [0, 1], ["16%", "28%"]);
+  const circleY = useTransform(sy, [0, 1], ["-4%", "6%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.95, 1.08, 1.18]);
 
   // signature: portrait tilts subtly toward the cursor (3D parallax)
