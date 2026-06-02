@@ -36,7 +36,6 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.15 }}
             className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl tracking-tight text-balance font-light"
           >
-          >
             I study <em className="not-italic text-forest-soft">human behavior</em>, then build
             systems around it.
           </motion.h1>
