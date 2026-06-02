@@ -230,6 +230,18 @@ export function Building() {
                       </span>
                     ))}
                   </div>
+
+                  <div className="mt-8">
+                    <a
+                      href={p.visitUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 bg-forest hover:bg-forest-soft text-white px-6 py-3.5 rounded-full text-sm tracking-wide transition-all"
+                    >
+                      Visit {p.name}
+                      <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
