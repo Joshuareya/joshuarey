@@ -119,7 +119,7 @@ function InteractivePortrait() {
 
   // glow drifts behind the portrait as a backlight, not a foreground disk
   const circleX = useTransform(sx, [0, 1], ["-6%", "10%"]);
-  const circleY = useTransform(sy, [0, 1], ["16%", "28%"]);
+  const circleY = useTransform(sy, [0, 1], ["-4%", "6%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.95, 1.08, 1.18]);
 
   // signature: portrait tilts subtly toward the cursor (3D parallax)
@@ -177,7 +177,7 @@ function InteractivePortrait() {
           scale: circleScale,
           opacity: circleOpacity,
         }}
-        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[18%] -mt-[4%] h-32 w-32 md:h-48 md:w-48"
+        className="pointer-events-none col-start-1 row-start-1 self-center justify-self-center z-0 -ml-[55%] -mt-[10%] h-32 w-32 md:h-48 md:w-48"
       >
         {/* soft outer halo */}
         <div className="absolute -inset-8 rounded-full bg-forest/15 blur-3xl" />
