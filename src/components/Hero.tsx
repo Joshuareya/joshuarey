@@ -149,8 +149,12 @@ function InteractivePortrait() {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className="group relative grid isolate aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
+      style={{ perspective: 1100 }}
     >
-      <div className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden">
+      <motion.div
+        style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
+        className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden"
+      >
         <img
           src={heroImg}
           alt="Joshua Rey portrait in traditional black agbada"
@@ -161,7 +165,7 @@ function InteractivePortrait() {
           }}
           draggable={false}
         />
-      </div>
+      </motion.div>
       <motion.div
         animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
