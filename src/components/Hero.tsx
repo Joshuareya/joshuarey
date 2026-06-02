@@ -122,6 +122,10 @@ function InteractivePortrait() {
   const circleY = useTransform(sy, [0, 1], ["16%", "28%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.95, 1.08, 1.18]);
 
+  // signature: portrait tilts subtly toward the cursor (3D parallax)
+  const tiltY = useTransform(sx, [0, 1], [9, -9]);
+  const tiltX = useTransform(sy, [0, 1], [-7, 7]);
+
   // scroll progression — as user scrolls past hero, glow fades but always stays behind portrait
   const { scrollYProgress } = useScroll({
     target: ref,
