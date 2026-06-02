@@ -7,6 +7,7 @@ import { Observing } from "@/components/Observing";
 import { Thoughts } from "@/components/Thoughts";
 import { FieldNotes } from "@/components/FieldNotes";
 import { Community } from "@/components/Community";
+import { Connect } from "@/components/Connect";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
