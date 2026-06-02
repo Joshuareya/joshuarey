@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
 
+import type { ReactNode } from "react";
+
 type Product = {
   id: string;
   name: string;
@@ -9,7 +11,8 @@ type Product = {
   behavior: string;
   system: string;
   themes: string[];
-  visual: React.ReactNode;
+  visual: ReactNode;
+  visitUrl: string;
 };
 
 /* ---------- Visual mocks ---------- */
@@ -148,6 +151,7 @@ const products: Product[] = [
       "A live system that shows who is out, why they left, when they're expected back, and what needs attention — in real time.",
     themes: ["Visibility", "Accountability", "Coordination", "Operational clarity"],
     visual: <MovlifyMock />,
+    visitUrl: "https://www.movlify.org",
   },
   {
     id: "tithetify",
@@ -161,6 +165,7 @@ const products: Product[] = [
       "A quiet companion that tracks giving, sends thoughtful reminders, builds streaks, and turns intention into rhythm.",
     themes: ["Generosity", "Accountability", "Intentional habits", "Consistency"],
     visual: <TithetifyMock />,
+    visitUrl: "https://www.tithetify.com",
   },
   {
     id: "werktify",
@@ -174,6 +179,7 @@ const products: Product[] = [
       "A location-aware platform that matches venues with nearby available workers and removes the friction in between.",
     themes: ["Speed", "Accessibility", "Local discovery", "Instant staffing"],
     visual: <WerktifyMock />,
+    visitUrl: "https://www.werktify.com",
   },
 ];
 
@@ -223,6 +229,18 @@ export function Building() {
                         {t}
                       </span>
                     ))}
+                  </div>
+
+                  <div className="mt-8">
+                    <a
+                      href={p.visitUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 bg-forest hover:bg-forest-soft text-white px-6 py-3.5 rounded-full text-sm tracking-wide transition-all"
+                    >
+                      Visit {p.name}
+                      <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    </a>
                   </div>
                 </div>
               </div>
