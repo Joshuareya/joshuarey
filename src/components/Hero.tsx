@@ -122,6 +122,10 @@ function InteractivePortrait() {
   const circleY = useTransform(sy, [0, 1], ["16%", "28%"]);
   const circleScale = useTransform(sx, [0, 0.5, 1], [0.95, 1.08, 1.18]);
 
+  // signature: portrait tilts subtly toward the cursor (3D parallax)
+  const tiltY = useTransform(sx, [0, 1], [9, -9]);
+  const tiltX = useTransform(sy, [0, 1], [-7, 7]);
+
   // scroll progression — as user scrolls past hero, glow fades but always stays behind portrait
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -145,8 +149,12 @@ function InteractivePortrait() {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className="group relative grid isolate aspect-[4/5] w-full max-w-[280px] sm:max-w-sm md:max-w-none mx-auto"
+      style={{ perspective: 1100 }}
     >
-      <div className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden">
+      <motion.div
+        style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: "preserve-3d" }}
+        className="pointer-events-none relative z-10 col-start-1 row-start-1 h-full w-full overflow-hidden"
+      >
         <img
           src={heroImg}
           alt="Joshua Rey portrait in traditional black agbada"
@@ -157,7 +165,7 @@ function InteractivePortrait() {
           }}
           draggable={false}
         />
-      </div>
+      </motion.div>
       <motion.div
         animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.1, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}

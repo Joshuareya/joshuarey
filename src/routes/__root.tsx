@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Toaster } from "@/components/ui/sonner";
+import { AmbientGlow } from "@/components/AmbientGlow";
 
 function NotFoundComponent() {
   return (
@@ -116,7 +118,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AmbientGlow />
       <Outlet />
+      <Toaster />
     </QueryClientProvider>
   );
 }
