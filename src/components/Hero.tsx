@@ -214,7 +214,7 @@ function InteractivePortrait() {
 
 
       {/* grounding shadow so the portrait rests instead of floating */}
-      <div className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-[5] mb-[1%] h-6 w-2/3 rounded-[100%] bg-black/55 blur-xl md:h-8" />
+      <div className="pointer-events-none col-start-1 row-start-1 self-end justify-self-center z-[5] mb-[7%] md:mb-[9%] h-6 w-2/3 rounded-[100%] bg-black/55 blur-xl md:h-8" />
     </div>
   );
 }
