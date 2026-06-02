@@ -90,12 +90,17 @@ export function Community() {
               transition={{ duration: 0.8 }}
               className="text-3xl md:text-5xl leading-tight tracking-tight font-light text-balance"
             >
-              Tree planting with Joshua Rey.
+              The same thinking, offline.
             </motion.h2>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Small intentional actions shape the future too. A quiet, recurring
-              gathering where we plant trees, talk, and remember that systems are not
-              only digital.
+              A tree is a system too — small input, compounding output, results you only
+              see if you stay consistent. So a few times a year we gather, plant, and talk
+              about the systems we're each building. It's the clearest version of
+              everything else on this page: simple actions, made visible, repeated.
+            </p>
+            <p className="mt-4 text-base text-foreground/70 max-w-xl leading-relaxed">
+              No app. No streak counter. Just behavior shaping the future, one season at a
+              time.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
