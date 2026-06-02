@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { animate, motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
  * A soft, site-wide forest glow that quietly trails the cursor.
