@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useSpring, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { getNote, getNextNote, SOCIAL_IMAGE } from "@/lib/field-notes";
@@ -55,7 +55,6 @@ export const Route = createFileRoute("/notes/$slug")({
 
 function NotePage() {
   const { note, nextNote } = Route.useLoaderData();
-  const articleRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -63,7 +62,12 @@ function NotePage() {
     damping: 30,
     restDelta: 0.001,
   });
-  const readPercent = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const [readPercent, setReadPercent] = useState(0);
+  const readOpacity = useTransform(scrollYProgress, [0, 0.05, 0.1], [0, 0, 1]);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
+    setReadPercent(Math.round(latest * 100));
+  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -76,14 +80,14 @@ function NotePage() {
       {/* Read percentage */}
       <motion.div
         className="fixed top-4 right-4 z-50 text-[10px] uppercase tracking-[0.25em] text-muted-foreground tabular-nums"
-        style={{ opacity: useTransform(scrollYProgress, [0, 0.05, 0.1], [0, 0, 1]) }}
+        style={{ opacity: readOpacity }}
       >
-        <ReadPercent value={readPercent} />
+        {readPercent}% read
       </motion.div>
 
       <Nav />
       <main className="px-6 md:px-10 py-32 md:py-44">
-        <article ref={articleRef} className="mx-auto max-w-2xl">
+        <article className="mx-auto max-w-2xl">
           <Link
             to="/"
             hash="field-notes"
@@ -123,7 +127,7 @@ function NotePage() {
               className="mt-12 mb-10 pl-6 md:pl-8 border-l-2 border-forest-soft/40"
             >
               <p className="text-xl md:text-2xl font-light leading-snug tracking-tight text-foreground/90 italic">
-                "{note.pullQuote}"
+                &ldquo;{note.pullQuote}&rdquo;
               </p>
             </motion.blockquote>
 
@@ -219,33 +223,6 @@ function NotePage() {
   );
 }
 
-function ReadPercent({ value }: { value: ReturnType<typeof useTransform> }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  useMotionValueEvent(value, "change", (latest: number) => {
-    if (ref.current) {
-      ref.current.textContent = `${Math.round(latest)}% read`;
-    }
-  });
-  return <span ref={ref}>0% read</span>;
-}
-
-// Helper to listen to motion value changes
-function useMotionValueEvent(
-  value: ReturnType<typeof useTransform>,
-  event: "change",
-  callback: (latest: number) => void
-) {
-  // framer-motion useMotionValueEvent equivalent
-  const savedCallback = useRef(callback);
-  savedCallback.current = callback;
-  // We use a simple effect to subscribe
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { useEffect } = require("react");
-  useEffect(() => {
-    return value.on("change", (latest: number) => savedCallback.current(latest));
-  }, [value]);
-}
-
 async function handleShare(slug: string, title: string) {
   const url = `${window.location.origin}/notes/${slug}`;
   try {
@@ -254,8 +231,6 @@ async function handleShare(slug: string, title: string) {
       return;
     }
     await navigator.clipboard.writeText(url);
-    // eslint-disable-next-line no-console
-    console.log("Link copied");
   } catch {
     // user cancelled native share, or clipboard blocked — fail quietly
   }
