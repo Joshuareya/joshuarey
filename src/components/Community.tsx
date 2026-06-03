@@ -91,7 +91,7 @@ export function Community() {
               transition={{ duration: 0.8 }}
               className="text-3xl md:text-5xl leading-tight tracking-tight font-light text-balance"
             >
-              The same thinking, offline.
+              Tree Planting with Joshua Rey
             </motion.h2>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
               A tree is a system too — small input, compounding output, results you only
