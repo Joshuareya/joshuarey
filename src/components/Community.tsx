@@ -77,6 +77,20 @@ function PeopleIcon({ delay = 0 }: { delay?: number }) {
 }
 
 export function Community() {
+  const handleShare = async () => {
+    const url = `${window.location.origin}/tree-planting`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Tree Planting with Joshua Rey", url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copied", { description: "Share Tree Planting with Joshua Rey anywhere." });
+    } catch {
+      // user cancelled native share, or clipboard blocked — fail quietly
+    }
+  };
+
   return (
     <section id="community" className="relative py-32 md:py-44 px-6 md:px-10 border-t border-border">
       <div className="mx-auto max-w-7xl">
