@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { SectionLabel } from "./SectionLabel";
 
 function TreeIcon({ delay = 0 }: { delay?: number }) {
@@ -76,6 +77,20 @@ function PeopleIcon({ delay = 0 }: { delay?: number }) {
 }
 
 export function Community() {
+  const handleShare = async () => {
+    const url = `${window.location.origin}/tree-planting`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Tree Planting with Joshua Rey", url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copied", { description: "Share Tree Planting with Joshua Rey anywhere." });
+    } catch {
+      // user cancelled native share, or clipboard blocked — fail quietly
+    }
+  };
+
   return (
     <section id="community" className="relative py-32 md:py-44 px-6 md:px-10 border-t border-border">
       <div className="mx-auto max-w-7xl">
@@ -90,7 +105,7 @@ export function Community() {
               transition={{ duration: 0.8 }}
               className="text-3xl md:text-5xl leading-tight tracking-tight font-light text-balance"
             >
-              The same thinking, offline.
+              Tree Planting with Joshua Rey
             </motion.h2>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
               A tree is a system too — small input, compounding output, results you only
@@ -121,6 +136,14 @@ export function Community() {
               >
                 Message on WhatsApp
               </a>
+              <button
+                type="button"
+                onClick={handleShare}
+                className="inline-flex items-center gap-3 border border-border hover:border-foreground px-6 py-3.5 rounded-full text-sm tracking-wide transition-all cursor-pointer"
+                aria-label="Share Tree Planting with Joshua Rey"
+              >
+                Share
+              </button>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
