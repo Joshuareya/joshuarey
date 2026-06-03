@@ -1,14 +1,15 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { getNote, SOCIAL_IMAGE } from "@/lib/field-notes";
+import { getNote, getNextNote, SOCIAL_IMAGE } from "@/lib/field-notes";
 
 export const Route = createFileRoute("/notes/$slug")({
   loader: ({ params }) => {
     const note = getNote(params.slug);
     if (!note) throw notFound();
-    return { note };
+    return { note, nextNote: getNextNote(params.slug) };
   },
   head: ({ params, loaderData }) => {
     const note = loaderData?.note;
@@ -53,13 +54,36 @@ export const Route = createFileRoute("/notes/$slug")({
 });
 
 function NotePage() {
-  const { note } = Route.useLoaderData();
+  const { note, nextNote } = Route.useLoaderData();
+  const articleRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const readPercent = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Reading progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] bg-forest-soft origin-left z-50"
+        style={{ scaleX }}
+      />
+
+      {/* Read percentage */}
+      <motion.div
+        className="fixed top-4 right-4 z-50 text-[10px] uppercase tracking-[0.25em] text-muted-foreground tabular-nums"
+        style={{ opacity: useTransform(scrollYProgress, [0, 0.05, 0.1], [0, 0, 1]) }}
+      >
+        <ReadPercent value={readPercent} />
+      </motion.div>
+
       <Nav />
       <main className="px-6 md:px-10 py-32 md:py-44">
-        <article className="mx-auto max-w-2xl">
+        <article ref={articleRef} className="mx-auto max-w-2xl">
           <Link
             to="/"
             hash="field-notes"
@@ -73,31 +97,168 @@ function NotePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="mt-10 flex items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-              <span>{note.date}</span>
-              <span>·</span>
-              <span>{note.read}</span>
-            </div>
-            <h1 className="mt-6 text-3xl md:text-5xl font-light leading-tight tracking-tight text-balance">
-              {note.title}
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              {note.excerpt}
-            </p>
+            {/* Ambient glow behind title */}
+            <div className="relative mt-10">
+              <div className="absolute -left-20 -top-10 w-40 h-40 rounded-full bg-forest-soft/10 blur-3xl pointer-events-none" />
 
-            <div className="mt-10 pt-10 border-t border-border space-y-6">
+              <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                <span>{note.date}</span>
+                <span>·</span>
+                <span>{note.read}</span>
+              </div>
+              <h1 className="mt-6 text-3xl md:text-5xl font-light leading-tight tracking-tight text-balance">
+                {note.title}
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                {note.excerpt}
+              </p>
+            </div>
+
+            {/* Pull quote */}
+            <motion.blockquote
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="mt-12 mb-10 pl-6 md:pl-8 border-l-2 border-forest-soft/40"
+            >
+              <p className="text-xl md:text-2xl font-light leading-snug tracking-tight text-foreground/90 italic">
+                "{note.pullQuote}"
+              </p>
+            </motion.blockquote>
+
+            {/* Body with staggered animations, drop cap, and dividers */}
+            <div className="mt-10 pt-10 border-t border-border space-y-8">
               {note.body.map((para: string, i: number) => (
-                <p key={i} className="text-foreground/85 leading-relaxed text-lg">
-                  {para}
-                </p>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: "easeOut" }}
+                >
+                  {i === note.body.length - 1 && (
+                    <div className="flex items-center gap-4 my-8">
+                      <div className="flex-1 h-px bg-border" />
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                        {note.date}
+                      </span>
+                      <div className="flex-1 h-px bg-border" />
+                    </div>
+                  )}
+                  {i === 0 ? (
+                    <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
+                      <span className="float-left text-5xl md:text-6xl font-light leading-[0.85] mr-3 mt-1 text-forest-soft">
+                        {para.charAt(0)}
+                      </span>
+                      {para.slice(1)}
+                    </p>
+                  ) : (
+                    <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
+                      {para}
+                    </p>
+                  )}
+                </motion.div>
               ))}
             </div>
+
+            {/* Share */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-14 flex items-center gap-6"
+            >
+              <button
+                type="button"
+                onClick={() => handleShare(note.slug, note.title)}
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-forest-soft transition-colors cursor-pointer"
+              >
+                <ShareIcon />
+                Share this note
+              </button>
+            </motion.div>
+
+            {/* Next note navigation */}
+            {nextNote && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="mt-20 pt-12 border-t border-border"
+              >
+                <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                  Next field note
+                </span>
+                <Link
+                  to="/notes/$slug"
+                  params={{ slug: nextNote.slug }}
+                  className="group mt-4 block"
+                >
+                  <h3 className="text-2xl md:text-3xl font-light leading-snug tracking-tight text-balance group-hover:text-forest-soft transition-colors">
+                    {nextNote.title}
+                  </h3>
+                  <div className="mt-3 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    <span>{nextNote.date}</span>
+                    <span>·</span>
+                    <span>{nextNote.read}</span>
+                    <span className="inline-block transition-transform group-hover:translate-x-1 ml-1">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            )}
           </motion.div>
         </article>
       </main>
       <Footer />
     </div>
   );
+}
+
+function ReadPercent({ value }: { value: ReturnType<typeof useTransform> }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useMotionValueEvent(value, "change", (latest: number) => {
+    if (ref.current) {
+      ref.current.textContent = `${Math.round(latest)}% read`;
+    }
+  });
+  return <span ref={ref}>0% read</span>;
+}
+
+// Helper to listen to motion value changes
+function useMotionValueEvent(
+  value: ReturnType<typeof useTransform>,
+  event: "change",
+  callback: (latest: number) => void
+) {
+  // framer-motion useMotionValueEvent equivalent
+  const savedCallback = useRef(callback);
+  savedCallback.current = callback;
+  // We use a simple effect to subscribe
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { useEffect } = require("react");
+  useEffect(() => {
+    return value.on("change", (latest: number) => savedCallback.current(latest));
+  }, [value]);
+}
+
+async function handleShare(slug: string, title: string) {
+  const url = `${window.location.origin}/notes/${slug}`;
+  try {
+    if (navigator.share) {
+      await navigator.share({ title: `Field note — ${title}`, url });
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+    // eslint-disable-next-line no-console
+    console.log("Link copied");
+  } catch {
+    // user cancelled native share, or clipboard blocked — fail quietly
+  }
 }
 
 function NoteNotFound() {
@@ -142,5 +303,27 @@ function NoteError({ error, reset }: { error: Error; reset: () => void }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ShareIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.6" y1="13.5" x2="15.4" y2="17.5" />
+      <line x1="15.4" y1="6.5" x2="8.6" y2="10.5" />
+    </svg>
   );
 }
