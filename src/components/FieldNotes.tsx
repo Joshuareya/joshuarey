@@ -23,7 +23,7 @@ export function FieldNotes() {
   }, []);
 
   const handleShare = async (slug: string, title: string) => {
-    const url = `${window.location.origin}${window.location.pathname}#${slug}`;
+    const url = `${window.location.origin}/notes/${slug}`;
     try {
       if (navigator.share) {
         await navigator.share({ title: `Field note — ${title}`, url });
