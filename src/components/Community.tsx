@@ -122,6 +122,14 @@ export function Community() {
               >
                 Message on WhatsApp
               </a>
+              <button
+                type="button"
+                onClick={handleShare}
+                className="inline-flex items-center gap-3 border border-border hover:border-foreground px-6 py-3.5 rounded-full text-sm tracking-wide transition-all cursor-pointer"
+                aria-label="Share Tree Planting with Joshua Rey"
+              >
+                Share
+              </button>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
