@@ -4,7 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
 export const TREE_PLANTING_SOCIAL_IMAGE =
-  "https://joshuarey.org/__l5e/assets-v1/f2f24628-8fa0-4461-ab73-db9e483266b3/tree-planting-social-v2.png";
+  "https://joshuarey.org/__l5e/assets-v1/31e817d6-ff66-4348-836c-edf3c18fe769/tree-planting-social-v3.png";
 
 const TITLE = "Tree Planting with Joshua Rey";
 const DESCRIPTION =
