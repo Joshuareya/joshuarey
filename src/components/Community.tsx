@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { SectionLabel } from "./SectionLabel";
 
 function TreeIcon({ delay = 0 }: { delay?: number }) {
