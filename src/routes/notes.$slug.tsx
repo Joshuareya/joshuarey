@@ -86,7 +86,7 @@ function NotePage() {
             </p>
 
             <div className="mt-10 pt-10 border-t border-border space-y-6">
-              {note.body.map((para, i) => (
+              {note.body.map((para: string, i: number) => (
                 <p key={i} className="text-foreground/85 leading-relaxed text-lg">
                   {para}
                 </p>
