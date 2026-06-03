@@ -83,8 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Joshua Rey" },
       { name: "twitter:description", content: "I study human behavior, then build systems around it." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/aOtlyaDiiwUOWRqgqtoIuHfTgA52/social-images/social-1779799026626-Tree_Planting.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/aOtlyaDiiwUOWRqgqtoIuHfTgA52/social-images/social-1779799026626-Tree_Planting.webp" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/aOtlyaDiiwUOWRqgqtoIuHfTgA52/social-images/social-1780447474258-Good_systems_make_the_right_behavior_easier._(2).webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/aOtlyaDiiwUOWRqgqtoIuHfTgA52/social-images/social-1780447474258-Good_systems_make_the_right_behavior_easier._(2).webp" },
     ],
     links: [
       {
