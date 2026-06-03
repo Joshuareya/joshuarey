@@ -4,6 +4,7 @@ export type FieldNote = {
   title: string;
   excerpt: string;
   read: string;
+  pullQuote: string;
   body: string[];
 };
 
@@ -19,6 +20,8 @@ export const notes: FieldNote[] = [
     excerpt:
       "When a tool is 15% harder than it should be, people don't complain. They just stop opening it.",
     read: "4 min",
+    pullQuote:
+      "Most products don't lose users to a competitor. They lose them to mild inconvenience.",
     body: [
       "Friction is invisible. It hides inside the small extra tap, the second-guess, the moment of uncertainty before someone commits. None of it is dramatic enough to complain about.",
       "But behavior is honest. People keep showing up to the tool that respects their time and quietly drift away from the one that doesn't. The decline is rarely loud — it just looks like fewer logins, shorter sessions, slower replies.",
@@ -32,6 +35,8 @@ export const notes: FieldNote[] = [
     excerpt:
       "Most teams add policy where they should have added a clear view. Behavior corrects itself once it can be seen.",
     read: "3 min",
+    pullQuote:
+      "Visibility works better than enforcement. The moment people can see what is happening, most things quietly self-correct.",
     body: [
       "When a team starts misbehaving, the first instinct is usually a new rule. A new policy. A new approval step. The system gets heavier and the underlying behavior rarely changes.",
       "Visibility works better than enforcement. The moment people can see who is doing what, when, and why, most things quietly self-correct. Nobody wants to be the obvious outlier.",
@@ -45,6 +50,8 @@ export const notes: FieldNote[] = [
     excerpt:
       "First-use is a marketing problem. The system is judged on day two — when the novelty is gone and the friction is honest.",
     read: "5 min",
+    pullQuote:
+      "Build for the returning user, not the new one. Novelty fades in a day. Habit takes weeks.",
     body: [
       "First impressions are designed. Second impressions are revealed. The onboarding flow can be polished to perfection and still hide everything that matters about a product.",
       "Day two is when the real questions surface. Is it faster than what I was doing before? Does it remember me? Does it respect what I learned yesterday?",
@@ -58,6 +65,8 @@ export const notes: FieldNote[] = [
     excerpt:
       "A streak is a story. A dashboard is a report. People show up for stories.",
     read: "3 min",
+    pullQuote:
+      "Numbers without narrative are forgettable. But a streak says something about who you are becoming.",
     body: [
       "A dashboard tells you the truth. A streak tells you who you are becoming. One is information; the other is identity.",
       "Numbers without narrative are forgettable. But a 22-week streak says something about the person holding it. It becomes part of how they see themselves, and that's a much stronger reason to return tomorrow.",
@@ -67,3 +76,9 @@ export const notes: FieldNote[] = [
 ];
 
 export const getNote = (slug: string) => notes.find((n) => n.slug === slug);
+
+export const getNextNote = (slug: string) => {
+  const idx = notes.findIndex((n) => n.slug === slug);
+  if (idx === -1) return undefined;
+  return notes[(idx + 1) % notes.length];
+};
