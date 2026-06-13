@@ -318,7 +318,7 @@ export function Building() {
           transition={{ duration: 0.8 }}
           className="text-3xl md:text-5xl leading-tight tracking-tight text-balance font-light max-w-3xl"
         >
-          Three systems. Each one starts with a human pattern, not a feature.
+          Five systems. Each one starts with a human pattern, not a feature.
         </motion.h2>
 
         <div className="mt-24 space-y-32 md:space-y-44">
