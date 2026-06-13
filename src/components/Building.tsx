@@ -328,7 +328,7 @@ export function Building() {
                 <div className="md:sticky md:top-28">
                   <div className="flex items-baseline gap-3">
                     <span className="text-xs font-mono text-forest-soft">
-                      0{idx + 1} / 03
+                      0{idx + 1} / 05
                     </span>
                   </div>
                   <h3 className="mt-4 text-4xl md:text-5xl font-light tracking-tight">
