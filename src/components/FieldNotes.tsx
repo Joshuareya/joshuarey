@@ -100,14 +100,43 @@ export function FieldNotes() {
                         className="overflow-hidden"
                       >
                         <div className="pt-6 mt-6 border-t border-border space-y-4 max-w-xl">
-                          {n.body.map((para, p) => (
-                            <p
-                              key={p}
-                              className="text-foreground/85 leading-relaxed"
-                            >
-                              {para}
-                            </p>
-                          ))}
+                          {n.body.map((para, p) => {
+                            // Simple markdown link parser inline
+                            const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                            const parts = [];
+                            let lastIndex = 0;
+                            let match;
+                            while ((match = regex.exec(para)) !== null) {
+                              if (match.index > lastIndex) {
+                                parts.push(para.slice(lastIndex, match.index));
+                              }
+                              parts.push(
+                                <a
+                                  key={match.index}
+                                  href={match[2]}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-forest-soft hover:underline font-normal"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  {match[1]}
+                                </a>
+                              );
+                              lastIndex = regex.lastIndex;
+                            }
+                            if (lastIndex < para.length) {
+                              parts.push(para.slice(lastIndex));
+                            }
+
+                            return (
+                              <p
+                                key={p}
+                                className="text-foreground/85 leading-relaxed"
+                              >
+                                {parts.length > 0 ? parts : para}
+                              </p>
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}
