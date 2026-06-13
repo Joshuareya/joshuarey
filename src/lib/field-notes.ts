@@ -14,6 +14,26 @@ export const SOCIAL_IMAGE =
 
 export const notes: FieldNote[] = [
   {
+    slug: "how-a-typo-cost-me-250000",
+    date: "June 2026",
+    title: "How a typo cost me ₦250,000",
+    excerpt:
+      "One digit in an eleven-character string, and ₦250,000 moved to a stranger. The riskiest moments are the ones that feel routine.",
+    read: "3 min",
+    pullQuote: "The riskiest moments are the ones that feel routine.",
+    body: [
+      "I was paying a supplier. Nothing unusual — an account number on a piece of paper, typed into my banking app the way it always is.",
+      "Halfway through, I got distracted. Came back, finished typing, sent it.",
+      "A few minutes later: 'I haven't received anything.'",
+      "One digit. Somewhere in eleven characters, I'd typed the wrong one — and ₦250,000 moved to a stranger, a different bank, a different name. Days of calls and disputes later, most of it was simply gone.",
+      "What stayed with me wasn't the money. It was how ordinary the moment had been. No alarm went off. No warning. Just a routine action, slightly wrong, with a permanent result.",
+      "This is the pattern I keep coming back to: the riskiest moments are the ones that feel routine. Typing a number is so familiar that no one treats it with the care it deserves — until it's too late.",
+      "Once I saw it as a behavior problem rather than a 'mistake,' the system became obvious. People don't mistype because they're careless. They mistype because typing eleven digits correctly, under no particular pressure, is simply harder than it looks — and there's no feedback loop until the money is already gone.",
+      "Remove the typing entirely, and the error has nowhere to live.",
+      "That observation became [ScanAcc](https://scanacc.xyz) — a QR code that copies an account number exactly, every time. Not a fix for carelessness. A removal of the step where carelessness becomes expensive."
+    ]
+  },
+  {
     slug: "cost-of-being-slightly-hard-to-use",
     date: "May 2026",
     title: "The cost of being slightly hard to use",

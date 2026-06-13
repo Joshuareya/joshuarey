@@ -150,18 +150,52 @@ function NotePage() {
                       <div className="flex-1 h-px bg-border" />
                     </div>
                   )}
-                  {i === 0 ? (
-                    <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
-                      <span className="float-left text-5xl md:text-6xl font-light leading-[0.85] mr-3 mt-1 text-forest-soft">
-                        {para.charAt(0)}
-                      </span>
-                      {para.slice(1)}
-                    </p>
-                  ) : (
-                    <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
-                      {para}
-                    </p>
-                  )}
+                  {(() => {
+                    const parseLinks = (text: string) => {
+                      const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                      const parts = [];
+                      let lastIndex = 0;
+                      let match;
+                      while ((match = regex.exec(text)) !== null) {
+                        if (match.index > lastIndex) {
+                          parts.push(text.slice(lastIndex, match.index));
+                        }
+                        parts.push(
+                          <a
+                            key={match.index}
+                            href={match[2]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-forest-soft hover:underline font-normal"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {match[1]}
+                          </a>
+                        );
+                        lastIndex = regex.lastIndex;
+                      }
+                      if (lastIndex < text.length) {
+                        parts.push(text.slice(lastIndex));
+                      }
+                      return parts.length > 0 ? parts : text;
+                    };
+
+                    if (i === 0) {
+                      return (
+                        <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
+                          <span className="float-left text-5xl md:text-6xl font-light leading-[0.85] mr-3 mt-1 text-forest-soft">
+                            {para.charAt(0)}
+                          </span>
+                          {parseLinks(para.slice(1))}
+                        </p>
+                      );
+                    }
+                    return (
+                      <p className="text-foreground/85 leading-[1.85] text-lg max-w-prose">
+                        {parseLinks(para)}
+                      </p>
+                    );
+                  })()}
                 </motion.div>
               ))}
             </div>
