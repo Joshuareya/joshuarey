@@ -138,6 +138,100 @@ function WerktifyMock() {
   );
 }
 
+function ScanAccMock() {
+  return (
+    <div className="rounded-md border border-border bg-ink/60 backdrop-blur p-5 text-xs font-mono">
+      <div className="flex items-center justify-between pb-3 border-b border-border">
+        <span className="uppercase tracking-widest text-muted-foreground">Payment page</span>
+        <span className="text-forest-soft">scanacc.app</span>
+      </div>
+      <div className="mt-5 flex items-center gap-5">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-7 gap-0.5 p-2 rounded-sm bg-foreground/5 border border-border/60"
+        >
+          {Array.from({ length: 49 }).map((_, i) => {
+            const filled = [0, 1, 2, 5, 6, 7, 8, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 33, 35, 36, 40, 42, 43, 44, 47, 48].includes(i);
+            return (
+              <span
+                key={i}
+                className={`h-1.5 w-1.5 rounded-[1px] ${filled ? "bg-foreground" : "bg-transparent"}`}
+              />
+            );
+          })}
+        </motion.div>
+        <div className="flex-1">
+          <div className="text-foreground text-sm">Mama Sade Foods</div>
+          <div className="text-muted-foreground mt-1">GTBank</div>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="text-foreground tracking-wider">0123456789</span>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-3 inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-forest-soft border border-forest-soft px-2 py-0.5 rounded-full"
+          >
+            Copied · 0123456789
+          </motion.div>
+        </div>
+      </div>
+      <div className="mt-5 pt-3 border-t border-border flex justify-between text-muted-foreground">
+        <span>Scan · Copy · Pay</span>
+        <span className="text-foreground">3 taps</span>
+      </div>
+    </div>
+  );
+}
+
+function HazardReporterMock() {
+  const reports = [
+    { ref: "HZ-118", title: "Exposed wiring · Bay 3", score: 16, level: "High" },
+    { ref: "HZ-117", title: "Wet floor · Loading dock", score: 9, level: "Medium" },
+    { ref: "HZ-116", title: "Blocked fire exit", score: 20, level: "Critical" },
+    { ref: "HZ-115", title: "Missing guard rail", score: 6, level: "Low" },
+  ];
+  const color = (l: string) =>
+    l === "Critical" || l === "High"
+      ? "text-destructive"
+      : l === "Medium"
+      ? "text-foreground"
+      : "text-forest-soft";
+  return (
+    <div className="rounded-md border border-border bg-ink/60 backdrop-blur p-5 text-xs font-mono">
+      <div className="flex items-center justify-between pb-3 border-b border-border">
+        <span className="uppercase tracking-widest text-muted-foreground">Hazard register</span>
+        <span className="text-forest-soft">5×5 scoring</span>
+      </div>
+      <div className="mt-3 space-y-2">
+        {reports.map((r, i) => (
+          <motion.div
+            key={r.ref}
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08 }}
+            className="grid grid-cols-12 gap-2 py-2 border-b border-border/40 last:border-0 items-center"
+          >
+            <span className="col-span-2 text-muted-foreground">{r.ref}</span>
+            <span className="col-span-6 text-foreground">{r.title}</span>
+            <span className="col-span-2 text-right text-muted-foreground">{r.score}</span>
+            <span className={`col-span-2 text-right ${color(r.level)}`}>{r.level}</span>
+          </motion.div>
+        ))}
+      </div>
+      <div className="mt-4 pt-3 border-t border-border flex justify-between text-muted-foreground">
+        <span>Private by link</span>
+        <span>ISO 45001 ready</span>
+      </div>
+    </div>
+  );
+}
+
 const products: Product[] = [
   {
     id: "movlify",
