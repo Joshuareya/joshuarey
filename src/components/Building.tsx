@@ -275,6 +275,34 @@ const products: Product[] = [
     visual: <WerktifyMock />,
     visitUrl: "https://www.werktify.com",
   },
+  {
+    id: "scanacc",
+    name: "ScanAcc",
+    tagline: "A payment identity layer for businesses.",
+    problem:
+      "Customers fumble through typing long account numbers, mishear digits, and make costly transfer errors. Every payment starts with friction.",
+    behavior:
+      "People reach for the path of least effort. Scanning and tapping beats typing and double-checking — speed wins, and accuracy follows.",
+    system:
+      "A scannable payment page, QR code, and printable poster that lets anyone copy an account number into their bank app in seconds.",
+    themes: ["Speed", "Accuracy", "Accessibility", "Trust"],
+    visual: <ScanAccMock />,
+    visitUrl: "https://scanacc.xyz",
+  },
+  {
+    id: "hazard-reporter",
+    name: "Hazard Reporter",
+    tagline: "A private hazard register for every workplace.",
+    problem:
+      "Workplace hazards go unreported because the process is slow, public, or punitive. Risks stay invisible until something goes wrong.",
+    behavior:
+      "People only report when it's easy and safe to do so. Remove the friction and the fear, and the information finally surfaces.",
+    system:
+      "A private, link-based register with anonymous reporting, 5×5 risk scoring, and Excel exports — ISO 45001 ready out of the box.",
+    themes: ["Safety", "Visibility", "Accountability", "Compliance"],
+    visual: <HazardReporterMock />,
+    visitUrl: "https://hazardreporter.com",
+  },
 ];
 
 export function Building() {
